@@ -20,5 +20,4 @@ if __name__ == "__main__":
   for S in product(['(', ')'], repeat=N):
     if check(S):
       print(*S, sep='')
-
-
+      
