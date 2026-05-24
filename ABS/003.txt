@@ -1,0 +1,5 @@
+mv = max(enumerate(dist0), key=lambda x: x[1])[0]
+
+dist0という配列をenumerate()でindexとvalueを(index, value)のようにペアにし、
+key=lambda x:x[1]で(index, value)のvalueで比較するようにしている。max()でvalueが一番大きい
+(index, value)が出てくるので、そのindexを取得するためにmax()[0]をしている
