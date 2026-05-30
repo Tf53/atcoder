@@ -1,0 +1,8 @@
+set()関数
+重複を許さない集合を取得できる
+Hashのように指定した値が含まれているかが高速でわかる
+例：
+list = [...]
+listset = set(list)
+if value in listset:
+  return True
