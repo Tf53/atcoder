@@ -44,30 +44,37 @@ int binary_search_less(const vector<T>& a, T target){
   return ok;
 }
 
-template <typename T>
-void show_vector(const vector<T>& a){
-  for(int i=0;i<(int)a.size();i++){
-    cout << a[i] << (i+1 == (int)a.size() ? "" : " ");
-  }
-  cout << endl;
-}
-
-// sort(ans.begin(),ans.end(),[](const vector<int>& a, const vector<int>& b){
-//   return a[0] < b[0];
-// });
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
   int n;
   cin >> n;
+  vector<ll> x(n);
+  vector<ll> p(n);
+  rep(i,n){cin >> x[i];}
+  rep(i,n){cin >> p[i];}
 
-  vector<int> a(n);
-  for(int i=0;i<n;i++) {cin >> a[i];}
+  vector<ll> sum_people(n+1);
+  sum_people[0]=0;
+  rep3(i,1,n+1){
+    sum_people[i]=sum_people[i-1]+p[i-1];
+  }
 
-  sort(a.begin(), a.end());
+  int q;
+  cin >> q;
+  for(int i=0;i<q;i++){
+    ll left, right;
+    cin >> left >> right;
+    int left_index = binary_search_higher(x,left);
+    int right_index = binary_search_less(x,right);
+    if(left_index<=right_index){
+      cout << sum_people[right_index+1]-sum_people[left_index] << endl;
+    }
+    else {
+      cout << 0 << '\n';
+    }
+  }
 
-  cout << a[n - 1] << '\n';
   return 0;
 }

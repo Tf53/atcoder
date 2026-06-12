@@ -52,10 +52,6 @@ void show_vector(const vector<T>& a){
   cout << endl;
 }
 
-// sort(ans.begin(),ans.end(),[](const vector<int>& a, const vector<int>& b){
-//   return a[0] < b[0];
-// });
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -63,11 +59,26 @@ int main() {
   int n;
   cin >> n;
 
-  vector<int> a(n);
-  for(int i=0;i<n;i++) {cin >> a[i];}
+  vector<int> p(n);
+  vector<int> q(n);
+  for(int i=0;i<n;i++) {cin >> p[i];}
+  for(int i=0;i<n;i++) {cin >> q[i];}
 
-  sort(a.begin(), a.end());
+  vector<vector<int>> ans(n);
 
-  cout << a[n - 1] << '\n';
+  rep(i,n){
+    int row = q[i];
+    int value = q[p[i]-1];
+    ans[i].push_back(row);
+    ans[i].push_back(value);
+  }
+
+  sort(ans.begin(),ans.end(),[](const vector<int>& a, const vector<int>& b){
+    return a[0] < b[0];
+  });
+
+  rep(i,n){
+    cout << ans[i][1] << endl;
+  }
   return 0;
 }

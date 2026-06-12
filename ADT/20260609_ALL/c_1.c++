@@ -12,7 +12,8 @@ using namespace std;
 
 template <typename T>
 int binary_search_target(const vector<T>& a, T target){
-  int left=0, right=(int)a.size()-1;
+  int left=0;
+  int right=(int)a.size()-1;
   while(left<=right){
     int mid=(right+left)/2;
     if(a[mid]==target){return mid;}
@@ -44,30 +45,24 @@ int binary_search_less(const vector<T>& a, T target){
   return ok;
 }
 
-template <typename T>
-void show_vector(const vector<T>& a){
-  for(int i=0;i<(int)a.size();i++){
-    cout << a[i] << (i+1 == (int)a.size() ? "" : " ");
-  }
-  cout << endl;
-}
-
-// sort(ans.begin(),ans.end(),[](const vector<int>& a, const vector<int>& b){
-//   return a[0] < b[0];
-// });
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int n, k;
+  cin >> n >> k;
 
-  vector<int> a(n);
+  vector<ll> a(n);
   for(int i=0;i<n;i++) {cin >> a[i];}
-
   sort(a.begin(), a.end());
 
-  cout << a[n - 1] << '\n';
+  int max_mex = 0;
+  for(int i=0;i<a[n-1]+1;i++){
+    if(binary_search_target<ll>(a,i) != -1 && i<k){
+      max_mex++;
+    }
+    else{break;}
+  }
+  cout << max_mex << endl;
   return 0;
 }
