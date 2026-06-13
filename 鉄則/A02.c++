@@ -6,11 +6,7 @@
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
 #define rep3(i,m,n) for(int i=(int)(m);i<(int)(n);i++)
-#define all(v) v.begin() v.end()
-using ll = long long
-
-const int INF = 1001001001;
-const ll LINF = 1001001001001001ll;
+#define ll long long
 
 using namespace std;
 
@@ -64,14 +60,15 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int n, x;
+  cin >> n >> x;
 
   vector<int> a(n);
   for(int i=0;i<n;i++) {cin >> a[i];}
+  sort(a.begin(),a.end());
 
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  int c = binary_search_target(a,x);
+  if(c != -1){cout << "Yes" << endl;}
+  else {cout << "No" << endl;}
   return 0;
 }

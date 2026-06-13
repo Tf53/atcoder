@@ -6,11 +6,8 @@
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
 #define rep3(i,m,n) for(int i=(int)(m);i<(int)(n);i++)
-#define all(v) v.begin() v.end()
-using ll = long long
-
-const int INF = 1001001001;
-const ll LINF = 1001001001001001ll;
+#define all(v) v.begin(), v.end()
+using ll = long long;
 
 using namespace std;
 
@@ -25,6 +22,7 @@ int binary_search_target(const vector<T>& a, T target){
   }
   return -1;
 }
+
 template <typename T>
 int binary_search_higher(const vector<T>& a, T target){
   int ok=(int)a.size();
@@ -36,6 +34,7 @@ int binary_search_higher(const vector<T>& a, T target){
   }
   return ok;
 }
+
 template <typename T>
 int binary_search_less(const vector<T>& a, T target){
   int ok=-1;
@@ -48,12 +47,16 @@ int binary_search_less(const vector<T>& a, T target){
   return ok;
 }
 
-template <typename T>
-void show_vector(const vector<T>& a){
-  for(int i=0;i<(int)a.size();i++){
-    cout << a[i] << (i+1 == (int)a.size() ? "" : " ");
+ll nCr(ll n, ll r) {
+    if(r<0||r>n)return 0;
+    if(r>n-r)r=n-r;
+
+    ll ans=1;
+    for(ll i=1;i<=r;i++){
+    ans*=(n-i+1);
+    ans/=i;
   }
-  cout << endl;
+    return ans;
 }
 
 // sort(ans.begin(),ans.end(),[](const vector<int>& a, const vector<int>& b){
@@ -64,14 +67,32 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int n, d;
+  cin >> n >> d;
+  vector<pair<int,int>> people(n);
+  rep(i,n) { cin >> people[i].first >> people[i].second;}
 
-  vector<int> a(n);
-  for(int i=0;i<n;i++) {cin >> a[i];}
+  ll len = 1200005;
+  vector<int> ans(len,0);
+  rep(i,n){
+    if(people[i].second-d+1<=people[i].first)continue;
+    ans[people[i].first]++;
+    ans[people[i].second+1-d]--;
+  }
 
-  sort(a.begin(), a.end());
+  rep3(i,1,len){
+    ans[i] = ans[i] + ans[i-1];
+  }
 
-  cout << a[n - 1] << '\n';
+  ll count = 0;
+  rep3(i,1,len){
+    if(i+d>len-1)break;
+    if(ans[i]>=2) {
+      count += nCr(ans[i],2);
+    }
+  }
+
+  cout << count << endl;
+
   return 0;
 }

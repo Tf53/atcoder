@@ -6,11 +6,8 @@
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
 #define rep3(i,m,n) for(int i=(int)(m);i<(int)(n);i++)
-#define all(v) v.begin() v.end()
-using ll = long long
-
-const int INF = 1001001001;
-const ll LINF = 1001001001001001ll;
+#define all(v) v.begin(), v.end()
+using ll = long long;
 
 using namespace std;
 
@@ -67,11 +64,24 @@ int main() {
   int n;
   cin >> n;
 
-  vector<int> a(n);
-  for(int i=0;i<n;i++) {cin >> a[i];}
+  vector<vector<int>> v(n+1);
 
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  rep3(i,1,n+1){
+    int ki;
+    cin >> ki;
+    rep(j,ki){
+      int w;
+      cin >> w;
+      v[w].push_back(i);
+    }
+  }
+  
+  rep3(i,1,n+1){
+    cout << v[i].size() << ' ';
+    rep(j,v[i].size()){
+      cout << v[i][j] << ' ';
+    }
+    cout << endl;
+  }
   return 0;
 }

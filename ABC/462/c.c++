@@ -6,11 +6,8 @@
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
 #define rep3(i,m,n) for(int i=(int)(m);i<(int)(n);i++)
-#define all(v) v.begin() v.end()
-using ll = long long
-
-const int INF = 1001001001;
-const ll LINF = 1001001001001001ll;
+#define all(v) v.begin(), v.end()
+using ll = long long;
 
 using namespace std;
 
@@ -41,8 +38,8 @@ int binary_search_less(const vector<T>& a, T target){
   int ok=-1;
   int ng=(int)a.size();
   while(abs(ng-ok)>1){
-    int mid=ok+(ng-ok)/2;
-    if(a[mid]<=target) ok=mid;
+    int mid=(ok+ng)/2;
+    if(a[mid]<target) ok=mid;
     else ng=mid;
   }
   return ok;
@@ -67,11 +64,24 @@ int main() {
   int n;
   cin >> n;
 
-  vector<int> a(n);
-  for(int i=0;i<n;i++) {cin >> a[i];}
+  vector<pair<int, int>> points(n);
+  rep(i, n) {
+    cin >> points[i].first >> points[i].second;
+  }
 
-  sort(a.begin(), a.end());
+  sort(all(points));
 
-  cout << a[n - 1] << '\n';
+  int count = 1;
+
+  int current_min_y = points[0].second;
+
+  rep3(i, 1, n) {
+    if (points[i].second < current_min_y) {
+      count++;
+    }
+    
+    current_min_y = min(current_min_y, points[i].second);
+  }
+  cout << count << endl;
   return 0;
 }
