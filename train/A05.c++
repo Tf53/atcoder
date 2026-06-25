@@ -64,14 +64,20 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int n, k;
+  cin >> n >> k;
 
   vector<int> a(n);
-  rep(i,n) {cin >> a[i];}
-
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  rep(i,n){a[i]=i+1;}
+  ll count = 0;
+  rep(i,n){
+    int ai = a[i];
+    rep(j,n){
+      int aj = a[j];
+      int target = k-ai-aj;
+      if(binary_search_target(a,target) != -1) count++;
+    }
+  }
+  cout << count << endl;
   return 0;
 }

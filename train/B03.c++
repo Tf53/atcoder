@@ -67,11 +67,20 @@ int main() {
   int n;
   cin >> n;
 
+  bool check = false;
   vector<int> a(n);
-  rep(i,n) {cin >> a[i];}
-
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  rep(i,n){cin >> a[i];}
+  rep(i,n-2){
+    int t = a[i];
+    rep3(j,i+1,n-1){
+      int q = a[j];
+      rep3(k,j+1,n){
+        int r = a[k];
+        if((t+q+r)==1000)check = true;
+      }
+    }
+  }
+  if(check)cout << "Yes" << endl;
+  else cout << "No" << endl;
   return 0;
 }

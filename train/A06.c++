@@ -64,14 +64,20 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int n, q;
+  cin >> n >> q;
 
   vector<int> a(n);
   rep(i,n) {cin >> a[i];}
 
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  vector<int> sum_a(n+1,0);
+  rep3(i,1,n+1){
+    sum_a[i] = sum_a[i-1]+a[i-1];
+  }
+  rep(i,q){
+    int l,r;
+    cin >> l >> r;
+    cout << sum_a[r]-sum_a[l-1] << endl;
+  }
   return 0;
 }

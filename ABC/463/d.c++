@@ -64,14 +64,19 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int n, k;
+  cin >> n >> k;
 
-  vector<int> a(n);
-  rep(i,n) {cin >> a[i];}
+  vector<pair<ll,ll>> lr(n);
+  rep(i,n){cin >> lr[i].first >> lr[u].second;}
 
-  sort(a.begin(), a.end());
+  ll len = 1000000000;
+  vector<int> sum_N(len);
+  rep(i,n){
+    sum_n[]
+  }
 
-  cout << a[n - 1] << '\n';
+
+  
   return 0;
 }

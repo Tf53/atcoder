@@ -64,14 +64,16 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  int n;
-  cin >> n;
+  int a, b;
+  cin >> a >> b;
 
-  vector<int> a(n);
-  rep(i,n) {cin >> a[i];}
-
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  bool check = false;
+  rep3(i,a,b+1){
+    if(100%i==0){
+      check=true;
+    }
+  }
+  if(check)cout << "Yes" << endl;
+  else cout << "No" << endl;
   return 0;
 }

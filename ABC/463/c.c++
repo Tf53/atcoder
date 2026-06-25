@@ -66,12 +66,24 @@ int main() {
 
   int n;
   cin >> n;
+  vector<pair<ll,ll>> a(n);
+  vector<ll> time(n);
+  rep(i,n){cin >> a[i].first >> a[i].second; time[i] = a[i].second;}
 
-  vector<int> a(n);
-  rep(i,n) {cin >> a[i];}
 
-  sort(a.begin(), a.end());
+  vector<ll> sufi_max(n);
+  sufi_max[n-1] = a[n-1].first;
+  for(int i=n-2;i>=0;i--){
+    sufi_max[i] = max(sufi_max[i+1],a[i].first);
+  }
+  int q;
+  cin >> q;
+  rep(i,q){
+    ll t;
+    cin >> t;
+    int index = binary_search_less(time,t);
+    cout << sufi_max[index+1] << endl;
+  }
 
-  cout << a[n - 1] << '\n';
   return 0;
 }

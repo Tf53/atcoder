@@ -65,13 +65,23 @@ int main() {
   cin.tie(nullptr);
 
   int n;
-  cin >> n;
+  string x;
+  cin >> n >> x;
 
-  vector<int> a(n);
-  rep(i,n) {cin >> a[i];}
+  vector<string> s(n);
+  rep(i,n) {cin >> s[i];}
 
-  sort(a.begin(), a.end());
-
-  cout << a[n - 1] << '\n';
+  vector<string> a = {"A","B","C","D","E"};
+  int index = 0;
+  rep(i,5){
+    if(a[i]==x)index = i;
+  }
+  
+  bool c = false;
+  rep(i,n){
+    if(s[i][index]=='o')c=true;
+  }
+  if(c)cout << "Yes" << endl;
+  else cout << "No" << endl;
   return 0;
 }
